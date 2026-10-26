@@ -8,31 +8,31 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Скачка кода из репозитория
+    - name: Downloading code from a repository
       uses: actions/checkout@v4
 
-    - name: Установка NodeJS
+    - name: Downloading NodeJS
       uses: actions/setup-node@v4
       with:
         node-version: '18.x'
 
-    - name: Установка Зависимостей
+    - name: Downloading dependencies
       run: npm install
 
-    - name: Запуск Тестов
+    - name: Start tests
       run: npm test
 
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Скачка кода из репозитория
+    - name: Downloading code from a repository
       uses: actions/checkout@v4
 
-    - name: Сохраняем Артефакт в Системе
+    - name: Saving the Artifact in the System
       run: zip -r weather-report-app.zip . -x "*.git*" "node_modules/*"
 
-    - name: Сохраняем Артефакт в Системе после архивирования
+    - name: Saving the Artifact in the System after archiving
       uses: actions/upload-artifact@v4
       with:
         name: app-build
